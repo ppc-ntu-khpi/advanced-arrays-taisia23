@@ -1,39 +1,196 @@
 # Практична робота "Поглиблене використання масивів"
 
-Цей репозиторій містить iнструкції та стартовий код для виконання практичної роботи з теми.
+## Завдання 9: Транспонувати (замінити рядки стовпцями) матрицю розміром N x M
 
-## В рамках практичної роботи ви маєте зробити наступне:
-1. написати клас, який містить методи для розв'язання обраного вами завдання та тестовий клас, який дозволяє перевірити його роботу. Класи мають міститись у теці ```src```. Не забуваємо про те, що основний клас **має бути універсальним, тобто він не містить інтерфейсу користувача - лише логіку (статичний метод), яка диктується завданням** (і можливо не всі його методи мають бути публічними)!
-2. методу ```main``` тестового класу **не може містити ніякої логіки, пов'язаної з виконанням завдання** - лише перевіряти працездатність основного класу!
-3. **README.MD репозиторію має містити опис обраного вами завдання** (краще - з картинками та форматуванням :blush:)!
-4. **УВАГА!** Не слід вважати, що завдання дуже прості! Вам необхідно подбати про:
-    * **оптимізацію програми - обрати оптимальні з точки зору обсягу використовуваної пам'яті типи даних**
-    * **іменування змінних і констант у відповідності до рекомендацій**
-    * **javadoc-коментарі для основного класу, які пояснюють що саме обчислюється і які вихідні дані для цього потрібні**
-5. завдання намагаємось виконувати **без циклів - з використанням класу ````Arrays````** (див. відеолекцію, та приклад, який я там розв'язав)
-6. здати завдання. **Нагадую, що здаючи завдання через Google Classroom, слід вказати посилання на створений для вас репозиторій!**
+Calc.java
+````java
+package main;
 
-**P.S.** Ви можете обрати завдання на власний розсуд - реалізувати алгоритм, який вас зацікавив, однак якщо буде надто багато однакових класів, завдання не буде зараховано - намагайтесь робити самотужки та у власному стилі! Звісно ж, ніхто не забороняє користуватись Інтернетом, шукати й використовувати знайдене у Мережі!
+import java.util.Random;
 
-----
+/**
+ * Клас Calc містить методи для транспонування матриць і генерації випадкових матриць.
+ * 
+ * @author Таїсія
+ */
+public class Calc {
+    /**
+     * Транспонує задану матрицю.
+     * 
+     * @param matrix Матриця, яку потрібно транспонувати
+     * @return Транспонована матриця
+     */
+    public static int[][] transposeMatrix(int[][] matrix) {
+        int rows = matrix.length;
+        int columns = matrix[0].length;
+        int[][] transposedMatrix = new int[columns][rows];
+        
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                transposedMatrix[j][i] = matrix[i][j];
+            }
+        }
+        
+        return transposedMatrix;
+    }
+    
+    /**
+     * Генерує випадкову матрицю заданого розміру.
+     * 
+     * @param rows Кількість рядків у матриці
+     * @param columns Кількість стовпців у матриці
+     * @return Випадково згенерована матриця
+     */
+    public static int[][] generateRandomMatrix(int rows, int columns) {
+        Random random = new Random();
+        int[][] matrix = new int[rows][columns];
+        
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                matrix[i][j] = random.nextInt(100); // Генерує випадкове число від 0 до 99
+            }
+        }
+        
+        return matrix;
+    }
+}
 
-## Список завдань
-1. Заповніть квадратну матрицю заданого порядку N простими числами з вказаного діапазону і виведіть її 
-2. Заповнити квадратну матрицю заданого порядку N числами в порядку зростання, починаючи з заданого числа x, наприклад (для N=3, x=14), <pre>
-[14,15,16]
-[17,18,19]
-[20,21,22]</pre>
-3. Знайти в матриці розміром N x M число, яке повторюється найбільшу кількість разів
-4. Знайти друге за величиною число у матриці розміром N x M 
-5. Обчислити суму елементів матриці розміром N x M 
-6. Знайти [добуток](https://uk.wikipedia.org/wiki/%D0%9C%D0%BD%D0%BE%D0%B6%D0%B5%D0%BD%D0%BD%D1%8F_%D0%BC%D0%B0%D1%82%D1%80%D0%B8%D1%86%D1%8C) двох матриць розмірами N x M та  M x Q
-7. Знайти суму двох матриць розміром N x M 
-8.  Відсортувати квадратну матрицю заданого порядку N у порядку зростання елементів (зліва-направо, зверху-вниз)
-9. [Транспонувати](https://uk.wikipedia.org/wiki/%D0%A2%D1%80%D0%B0%D0%BD%D1%81%D0%BF%D0%BE%D0%BD%D0%BE%D0%B2%D0%B0%D0%BD%D0%B0_%D0%BC%D0%B0%D1%82%D1%80%D0%B8%D1%86%D1%8F) (замінити рядки стовпцями) матрицю розміром N x M 
-10. Заповніть матрицю розміром N x M числами, кожне з яких дорівнює сумі двох попередніх елементів (елементи a<sub>11</sub> a<sub>12</sub>  дорівнюють 1, а інші обчислюються за правилом: a<sub>ij</sub> = a<sub>ij-1</sub> + a<sub>ij-2</sub>)
-11. Знайти максимальні елементи рядків матриці розміром N x M
-12. Знайти рядок матриці розміром N x M з максимальною сумою елементів
-13. Знайти стовпець матриці розміром N x M з максимальною сумою елементів
-14. У матриці розміром N x M поміняти місцями два вказвні рядки
-15. У матриці розміром N x M поміняти місцями два вказвні стовпці
-16. З заданої матриці розміром N x M утворити нову матрицю останній стовпець якої містить суми елементів рядків вихідної матриці
+````
+
+Main.java
+````java
+package main;
+
+    import java.util.Scanner;
+/**
+ * Клас Main надає просте меню для транспонування випадково згенерованої матриці.
+ * Користувачі можуть обрати транспонування матриці або вийти з програми.
+ * 
+ * @author Таїсія
+ */
+public class Main {
+     /**
+     * Головний метод виводить меню та обробляє введення користувача.
+     * 
+     * @param args Аргументи командного рядка
+     */
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.println("Choose option:");
+        System.out.println("1. Transpose matrix");
+        System.out.println("2. Exit");
+        
+        int option = scanner.nextInt();
+        
+        switch (option) {
+            case 1:
+                System.out.println("enter matrix size (rows and collums separated by space):");
+                int rows = scanner.nextInt();
+                int columns = scanner.nextInt();
+                
+                int[][] matrix = Calc.generateRandomMatrix(rows, columns);
+                
+                System.out.println("Starter matrix:");
+                printMatrix(matrix);
+                
+                int[][] transposedMatrix = Calc.transposeMatrix(matrix);
+                
+                System.out.println("Transposed matrix:");
+                printMatrix(transposedMatrix);
+                break;
+            case 2:
+                System.out.println("Bye!");
+                break;
+            default:
+                System.out.println("Unknown option, try again.");
+        }
+        
+        scanner.close();
+    }
+    
+   /**
+     * Друкує матрицю на консоль.
+     * 
+     * @param matrix Матриця, яку потрібно вивести
+     */
+    public static void printMatrix(int[][] matrix) {
+        for (int[] row : matrix) {
+            for (int value : row) {
+                System.out.print(value + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+````
+MainTest.java
+````java
+package main;
+
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+/**
+ *
+ * @author Таїсія
+ * 
+ * Клас MainTest містить тести для перевірки працездатності класів Main і Calc.
+*/ 
+public class MainTest {
+    
+    public MainTest() {
+    }
+    
+    @BeforeClass
+    public static void setUpClass() {
+    }
+    
+    @AfterClass
+    public static void tearDownClass() {
+    }
+    
+    @Before
+    public void setUp() {
+    }
+    
+    @After
+    public void tearDown() {
+    }
+    
+     /**
+     * Перевірка транспонування матриці.
+     */
+    @Test
+    public void testTestTransposeMatrix() {
+        int[][] originalMatrix = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        int[][] expectedTransposedMatrix = {{1, 4, 7}, {2, 5, 8}, {3, 6, 9}};
+        
+        int[][] transposedMatrix = Calc.transposeMatrix(originalMatrix);
+        
+        assertArrayEquals(expectedTransposedMatrix, transposedMatrix);
+    }
+    
+     /**
+     * Перевірка генерації випадкової матриці.
+     */
+    @Test
+    public void testTestGenerateRandomMatrix() {
+        int rows = 3;
+        int columns = 4;
+        
+        int[][] randomMatrix = Calc.generateRandomMatrix(rows, columns);
+        
+        assertEquals(rows, randomMatrix.length);
+        assertEquals(columns, randomMatrix[0].length);
+    }
+    
+}
+
+````
