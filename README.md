@@ -194,3 +194,7 @@ public class MainTest {
 }
 
 ````
+
+## Результат:
+
+![](srs/images/result.png)
